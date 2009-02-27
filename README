@@ -1,8 +1,6 @@
 Workbler
 ========
-
-Introduction goes here.
-
+Workbler allows you to do background jobs when you deploy your JRuby on Rails application as war file.
 
 Getting Started
 ===============
@@ -36,6 +34,14 @@ TBD
 
 Installing RabbitMQ
 ===================
+1. Install MacPorts
+2. sudo port install erlang
+3. wget http://www.rabbitmq.com/releases/rabbitmq-server/v1.5.3/rabbitmq-server-1.5.3.tar.gz
+4. tar zxvf rabbitmq-server-1.5.3.tar.gz
+5. sudo mv rabbitmq_server-1.5.3 /opt/local/lib/erlang/lib
+
+To run RabbitMQ
+6. sudo /opt/local/lib/erlang/lib/rabbitmq_server-1.5.3/sbin/rabbitmq-server
 
 TODO
 ====
