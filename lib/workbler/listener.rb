@@ -11,7 +11,6 @@ module Workbler
     
     def listen
       @listener ||= Workbler::RabbitMQInvoker.new(@workers)
-      puts "Start Listening..."
       @listener.listen
     end
   end
