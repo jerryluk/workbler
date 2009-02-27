@@ -32,11 +32,11 @@ Configuration
 =============
 TBD
 
-Installing RabbitMQ
-===================
+Installing RabbitMQ on OS X
+===========================
 1. Install MacPorts
 2. sudo port install erlang
-3. wget http://www.rabbitmq.com/releases/rabbitmq-server/v1.5.3/rabbitmq-server-1.5.3.tar.gz
+3. wget http://www.rabbitmq.com/releases/rabbitmq-server/v1.5.3/rabbitmq-server-generic-unix-1.5.3.tar.gz
 4. tar zxvf rabbitmq-server-1.5.3.tar.gz
 5. sudo mv rabbitmq_server-1.5.3 /opt/local/lib/erlang/lib
 
