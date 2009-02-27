@@ -16,14 +16,30 @@ Getting Started
 8. When you are ready to deploy, run warbler: warble
 9. Deploy your railsapp.war file to your favorite Java application server
 
-Usage
-=====
+Example Usage
+=============
+Create a worker class in app/workers/test_worker:
+
+  class TestWorker < Workbler::Worker
+    def test(options)
+      logger.info("SyncWorker with options: #{options.inspect}")
+    end
+  end
+
+In anywhere of your code, do:
+ Workbler.run(:test_worker, :test, { :something => 123 })
 
 
 Configuration
 =============
+TBD
 
 Installing RabbitMQ
 ===================
+
+TODO
+====
+1. Test cases Test cases!!! RSpec test cases going to be checked in soon
+2. Configuration
 
 Copyright (c) 2009 Jerry Luk, released under the MIT license
