@@ -6,7 +6,7 @@ module Workbler
     def initialize
       @client = RabbitMQClient.new
       @queue = @client.queue('workbler')
-      @queue.bind(@client.exchange('workbler_exchange'), 'direct')
+      @queue.bind(@client.exchange('workbler_exchange'), 'fanout')
     end
     
     def run(klass, method, options = {})

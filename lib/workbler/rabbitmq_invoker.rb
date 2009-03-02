@@ -7,9 +7,10 @@ module Workbler
       @workers = workers
       @client = RabbitMQClient.new
       @queue = @client.queue('workbler')
-      @queue.bind(@client.exchange('workbler_exchange'), 'direct')
+      @queue.bind(@client.exchange('workbler_exchange'), 'fanout')
     end
     
+    # TODO: Write a test case for this method
     def listen
       loop do
         message = @queue.retrieve
@@ -27,7 +28,7 @@ module Workbler
     def dispatch!(klass, method, options = {})
       begin
         Workbler.logger.info "Dispatching job: #{options.delete(:uid)}"
-        # Workbler.find(klass, method).send(method, options)
+        Workbler.find(klass, method)
         @workers[klass].send(method, options)
       rescue Exception => e
         Workbler.logger.info "WORKBLER ERROR: runner could not invoke #{ self.class }:#{ method } with #{ options.inspect }. error was: #{ e.inspect }\n #{ e.backtrace.join("\n") }"
