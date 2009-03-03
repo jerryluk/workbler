@@ -1,6 +1,6 @@
 Workbler
 ========
-Workbler allows you to do background jobs when you deploy your JRuby on Rails application as war file.
+Workbler allows you to run background jobs when you deploy your JRuby on Rails application as war file.
 
 Getting Started
 ===============
