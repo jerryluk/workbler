@@ -5,4 +5,5 @@ require 'workbler/listener'
 require 'workbler/rabbitmq_dispatcher'
 require 'workbler/rabbitmq_invoker'
 
+Workbler::Base.load_config
 Workbler::Base.discover!

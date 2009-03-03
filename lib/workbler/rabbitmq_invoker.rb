@@ -5,9 +5,15 @@ module Workbler
   class RabbitMQInvoker
     def initialize(workers)
       @workers = workers
-      @client = RabbitMQClient.new
-      @queue = @client.queue('workbler')
-      @queue.bind(@client.exchange('workbler_exchange'), 'fanout')
+      @client = RabbitMQClient.new(:host     => Workbler::Base.config[:host],
+                                   :port     => Workbler::Base.config[:port],
+                                   :username => Workbler::Base.config[:username],
+                                   :password => Workbler::Base.config[:password],
+                                   :vhost    => Workbler::Base.config[:vhost])
+      @queue = @client.queue(Workbler::Base.config[:queue])
+      @queue.bind(@client.exchange("#{Workbler::Base.config[:queue]}_#{Time.now.to_i}_#{rand(1<<64)}", 
+        Workbler::Base.config[:exchange_type]),
+        Workbler::Base.config[:routing_key])
     end
     
     # TODO: Write a test case for this method

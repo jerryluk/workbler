@@ -1,6 +1,14 @@
 module Workbler
   class Base
+    mattr_reader :config
+    mattr_reader :workers
+    
     @@workers = []
+    @@config
+    
+    def self.load_config
+      @@config = Workbler::Config.new("#{RAILS_ROOT}/config/workbler.yml")
+    end
     
     def self.discover!
       Dir.glob(Workbler.load_path.map { |p| "#{ p }/**/*.rb" }).each { |worker| require worker }
@@ -10,10 +18,10 @@ module Workbler
       @@workers << klass
     end
     
-    def self.workers
-      # Make defensive copy if necessary
-      @@workers_copy ||= @@workers.clone
-    end
+    # def self.workers
+    #   # Make defensive copy if necessary
+    #   @@workers_copy ||= @@workers.clone
+    # end
     
   end
 end

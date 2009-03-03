@@ -1,0 +1,5 @@
+#!/usr/bin/env jruby
+puts "Loading Rails..."
+require File.dirname(__FILE__) + '/../config/environment'
+require File.dirname(__FILE__) + '/../config/workble'
+Thread.stop

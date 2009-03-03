@@ -1,0 +1,18 @@
+defaults:
+  host: 127.0.0.1
+  port: 5672
+  username: guest
+  password: guest
+  vhost: /
+
+development:
+  queue: 'workble_development'
+  num_workers: 5
+  
+test: 
+  queue: 'workble_test'
+  num_workers: 1
+
+production:
+  queue: 'workble_production'
+  num_workers: 10

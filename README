@@ -11,8 +11,9 @@ Getting Started
 5. Install Workbler Plugin: jruby script/plugin install git://github.com/jerryluk/workbler.git
 6. Run the Workbler generator: jruby script/generate workbler workble
 7. Code Code Code
-8. When you are ready to deploy, run warbler: warble
-9. Deploy your railsapp.war file to your favorite Java application server
+8. To run background task in development mode, open a new terminal, and run "jruby script/workbler" in the app directory
+9. When you are ready to deploy, run: "warble"
+10. Deploy your railsapp.war file to your favorite Java application server
 
 Example Usage
 =============
@@ -30,7 +31,7 @@ In anywhere of your code, do:
 
 Configuration
 =============
-TBD
+Please see config/workbler.yml
 
 Installing RabbitMQ on OS X
 ===========================
@@ -42,10 +43,5 @@ Installing RabbitMQ on OS X
 
 To run RabbitMQ
 6. sudo /opt/local/lib/erlang/lib/rabbitmq_server-1.5.3/sbin/rabbitmq-server
-
-TODO
-====
-1. Test cases Test cases!!! RSpec test cases going to be checked in soon
-2. Configuration
 
 Copyright (c) 2009 Jerry Luk, released under the MIT license
