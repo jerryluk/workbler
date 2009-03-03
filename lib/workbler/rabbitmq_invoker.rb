@@ -10,9 +10,9 @@ module Workbler
                                    :username => Workbler::Base.config[:username],
                                    :password => Workbler::Base.config[:password],
                                    :vhost    => Workbler::Base.config[:vhost])
-      @queue = @client.queue(Workbler::Base.config[:queue])
+      @queue = @client.queue(Workbler::Base.config[:queue], Workbler::Base.config[:persist])
       @queue.bind(@client.exchange("#{Workbler::Base.config[:queue]}_#{Time.now.to_i}_#{rand(1<<64)}", 
-        Workbler::Base.config[:exchange_type]),
+        Workbler::Base.config[:exchange_type], Workbler::Base.config[:persist]),
         Workbler::Base.config[:routing_key])
     end
     
