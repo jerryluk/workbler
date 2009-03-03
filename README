@@ -44,4 +44,8 @@ Installing RabbitMQ on OS X
 To run RabbitMQ
 6. sudo /opt/local/lib/erlang/lib/rabbitmq_server-1.5.3/sbin/rabbitmq-server
 
+Credits
+=======
+Special thanks to Nick Sieger. He wrote the wonderful StartupScriptLauncher which this project would not exist without it.
+
 Copyright (c) 2009 Jerry Luk, released under the MIT license
