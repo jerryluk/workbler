@@ -8,20 +8,17 @@ defaults:
 development:
   queue: workble_development
   exchange_type: fanout
-  routing_key: workble
   num_workers: 5
   persist: false
   
 test: 
   queue: workble_test
   exchange_type: fanout
-  routing_key: workble
   num_workers: 1
   persist: false
 
 production:
   queue: workble_production
   exchange_type: direct
-  routing_key: workble
   num_workers: 10
   persist: true
