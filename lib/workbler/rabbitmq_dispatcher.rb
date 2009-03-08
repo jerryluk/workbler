@@ -11,14 +11,19 @@ module Workbler
                                    :password => Workbler::Base.config[:password],
                                    :vhost    => Workbler::Base.config[:vhost])
       @queue = @client.queue(Workbler::Base.config[:queue], Workbler::Base.config[:persist])
-      @queue.bind(@client.exchange("#{Workbler::Base.config[:queue]}_#{Time.now.to_i}_#{rand(1<<64)}", 
-        Workbler::Base.config[:exchange_type], Workbler::Base.config[:persist]),
-        Workbler::Base.config[:routing_key])
+      exchange_name = "#{Workbler::Base.config[:queue]}_#{Time.now.to_i}_#{rand(1<<64)}_exchange"
+      routing_key = "#{Workbler::Base.config[:queue]}_#{Time.now.to_i}_#{rand(1<<64)}_route"
+      @queue.bind(@client.exchange(exchange_name, 
+        Workbler::Base.config[:exchange_type], 
+        Workbler::Base.config[:persist]),
+        routing_key)
     end
     
     def run(klass, method, options = {})
       message = { :klass => klass.to_s, :method => method, :options => options }
-      @persist ? @queue.publish(message, RabbitMQClient::MessageProperties::PERSISTENT_TEXT_PLAIN) : @queue.publish(message)
+      @persist ? 
+        @queue.publish(message, RabbitMQClient::MessageProperties::PERSISTENT_TEXT_PLAIN) : 
+        @queue.publish(message)
       Workbler.logger.info "Scheduled job: #{options[:uid]}"
     end
   end

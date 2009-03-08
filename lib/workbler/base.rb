@@ -18,10 +18,5 @@ module Workbler
       @@workers << klass
     end
     
-    # def self.workers
-    #   # Make defensive copy if necessary
-    #   @@workers_copy ||= @@workers.clone
-    # end
-    
   end
 end

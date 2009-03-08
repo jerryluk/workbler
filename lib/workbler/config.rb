@@ -1,7 +1,6 @@
 module Workbler
   class Config
     def initialize(filename)
-      # @config =  deep_symbolize_keys(YAML.load(ERB.new(IO.read(filename)).result)0
       # Default values
       config = nil
       begin

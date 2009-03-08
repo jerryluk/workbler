@@ -14,7 +14,8 @@ module Workbler
       exchange_name = "#{Workbler::Base.config[:queue]}_#{Time.now.to_i}_#{rand(1<<64)}_exchange"
       routing_key = "#{Workbler::Base.config[:queue]}_#{Time.now.to_i}_#{rand(1<<64)}_route"
       @queue.bind(@client.exchange(exchange_name, 
-        Workbler::Base.config[:exchange_type], Workbler::Base.config[:persist]),
+        Workbler::Base.config[:exchange_type], 
+        Workbler::Base.config[:persist]),
         routing_key)
     end
     
