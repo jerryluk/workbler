@@ -30,4 +30,12 @@ describe Workbler::RabbitMQInvoker do
     @invoker.dispatch!('TestWorker', 'test', {:option1 => 'abc', :uid => 'abc'})
   end
   
+  it "should call dispatch when it receives a message" do
+    def @queue.loop_subscribe(&block)
+      block.call({:klass => 'Test', :method => :AMethod, :options => {}})
+    end
+    @invoker.should_receive(:dispatch!).and_return true
+    @invoker.listen
+  end
+  
 end

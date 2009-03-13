@@ -19,18 +19,12 @@ module Workbler
         routing_key)
     end
     
-    # TODO: Write a test case for this method
     def listen
-      loop do
-        message = @queue.retrieve
-        if message
-          klass = message[:klass].camelize
-          method = message[:method]
-          options = message[:options]
-          dispatch!(klass, method, options)
-        else
-          sleep 1
-        end
+      @queue.loop_subscribe do |message|
+        klass = message[:klass].camelize
+        method = message[:method]
+        options = message[:options]
+        dispatch!(klass, method, options)
       end
     end
     
