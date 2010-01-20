@@ -17,8 +17,13 @@ describe Workbler::RabbitMQDispatcher do
   end
   
   it "should publish a message" do
-    @queue.should_receive(:publish).with(hash_including({:klass => 'klass', :method => :method, :options => {:option => 1}}), anything)
+    @queue.should_receive(:publish).with(hash_including({:klass => 'klass', :method => :method, :options => {:option => 1}}))
     @dispatcher.run(:klass, :method, {:option => 1})
+  end
+  
+  it "should able to stop the dispatcher" do
+    @client.should_receive(:disconnect)
+    @dispatcher.stop
   end
   
 end

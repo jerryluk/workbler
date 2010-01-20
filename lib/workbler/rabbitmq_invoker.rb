@@ -4,6 +4,7 @@ require 'rabbitmq_client'
 module Workbler
   class RabbitMQInvoker
     def initialize(workers)
+      @mutex = Mutex.new
       @workers = workers
       @client = RabbitMQClient.new(:host     => Workbler::Base.config[:host],
                                    :port     => Workbler::Base.config[:port],
@@ -19,13 +20,20 @@ module Workbler
         routing_key)
     end
     
-    # TODO: Write a test case for this method
     def listen
       @queue.subscribe do |message|
-        klass = message[:klass].camelize
-        method = message[:method]
-        options = message[:options]
-        dispatch!(klass, method, options)
+        @mutex.synchronize do
+          klass = message[:klass].camelize
+          method = message[:method]
+          options = message[:options]
+          dispatch!(klass, method, options)
+        end
+      end
+    end
+    
+    def stop
+      @mutex.synchronize do
+        @client.disconnect
       end
     end
     

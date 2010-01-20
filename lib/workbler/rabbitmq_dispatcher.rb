@@ -19,6 +19,10 @@ module Workbler
         routing_key)
     end
     
+    def stop
+      @client.disconnect
+    end
+    
     def run(klass, method, options = {})
       message = { :klass => klass.to_s, :method => method, :options => options }
       @persist ? 

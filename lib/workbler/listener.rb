@@ -13,5 +13,9 @@ module Workbler
       @listener ||= Workbler::RabbitMQInvoker.new(@workers)
       @listener.listen
     end
+    
+    def destroy
+      @listener.stop
+    end
   end
 end

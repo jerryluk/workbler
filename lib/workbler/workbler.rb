@@ -9,7 +9,7 @@ module Workbler
   mattr_accessor :logger
   
   @@logger ||= RAILS_DEFAULT_LOGGER
-  
+  @@dispatcher = nil
   @@mutex = Mutex.new
   # @@load_path = [ File.expand_path(File.join(File.dirname(__FILE__), '../../../app/workers')) ]
   @@load_path = "#{RAILS_ROOT}/app/workers"
@@ -20,9 +20,19 @@ module Workbler
     options[:uid] = uid if options.kind_of?(Hash) && !options[:uid]
     @@mutex.synchronize do
       @@dispatcher ||= Workbler::RabbitMQDispatcher.new
-      @@dispatcher.run(klass, method, options)
+      begin
+        @@dispatcher.run(klass, method, options)
+      rescue Exception => e
+        Workbler.logger.info "Exception in Workbler Dispatcher: + #{e.backtrace}"
+      end
     end
     uid
+  end
+  
+  def self.destroy
+    @@mutex.synchronize do
+      @@dispatcher.stop if @@dispatcher
+    end
   end
   
   # Copied from Workling

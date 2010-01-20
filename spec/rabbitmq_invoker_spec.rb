@@ -31,11 +31,16 @@ describe Workbler::RabbitMQInvoker do
   end
   
   it "should call dispatch when it receives a message" do
-    def @queue.loop_subscribe(&block)
+    def @queue.subscribe(&block)
       block.call({:klass => 'Test', :method => :AMethod, :options => {}})
     end
     @invoker.should_receive(:dispatch!).and_return true
     @invoker.listen
+  end
+  
+  it "should able to stop the invoker" do
+    @client.should_receive(:disconnect)
+    @invoker.stop
   end
   
 end
