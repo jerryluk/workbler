@@ -1,4 +1,4 @@
-gem 'jerryluk-rabbitmq-jruby-client'
+gem 'rabbitmq-jruby-client'
 require 'rabbitmq_client'
 
 module Workbler

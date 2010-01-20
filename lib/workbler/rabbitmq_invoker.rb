@@ -1,4 +1,4 @@
-gem 'jerryluk-rabbitmq-jruby-client'
+gem 'rabbitmq-jruby-client'
 require 'rabbitmq_client'
 
 module Workbler
@@ -19,8 +19,9 @@ module Workbler
         routing_key)
     end
     
+    # TODO: Write a test case for this method
     def listen
-      @queue.loop_subscribe do |message|
+      @queue.subscribe do |message|
         klass = message[:klass].camelize
         method = message[:method]
         options = message[:options]

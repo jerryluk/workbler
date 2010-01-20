@@ -7,7 +7,7 @@ Getting Started
 1. Make sure you can install RubyGem from GitHub (you only have to do this once): jruby -S gem sources -a http://gems.github.com
 2. Install and start RabbitMQ (see below)
 3. Install warbler gem: jruby -S gem install warbler
-4. Install JRuby RabbitMQ Client: jruby -S gem install jerryluk-rabbitmq-jruby-client
+4. Install JRuby RabbitMQ Client: jruby -S gem install rabbitmq-jruby-client
 5. Install Workbler Plugin: jruby script/plugin install git://github.com/jerryluk/workbler.git
 6. Run the Workbler generator: jruby script/generate workbler workble
 7. Code Code Code

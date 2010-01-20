@@ -1,10 +1,8 @@
 n = Workbler::Base.config[:num_workers]
 
 n.times do 
-  Thread.new do |t|
-    listener = Workbler::Listener.new
-    listener.listen
-  end
+  listener = Workbler::Listener.new
+  listener.listen
 end
 
 puts "#{n} Listeners are online."
