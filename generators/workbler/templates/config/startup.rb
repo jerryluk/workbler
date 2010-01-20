@@ -11,3 +11,4 @@ Thread.new do |t|
 end
 
 require 'workble'
+Thread.stop
