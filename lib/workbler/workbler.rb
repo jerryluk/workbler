@@ -23,7 +23,7 @@ module Workbler
       begin
         @@dispatcher.run(klass, method, options)
       rescue Exception => e
-        Workbler.logger.info "Exception in Workbler Dispatcher: + #{e.backtrace}"
+        self.exception_notify(e, {:type => "run", :klass => klass.to_s, :method => method.to_s, :options => options})
       end
     end
     uid
@@ -33,6 +33,10 @@ module Workbler
     @@mutex.synchronize do
       @@dispatcher.stop if @@dispatcher
     end
+  end
+  
+  def self.exception_notify(exception, data={})
+    @@logger.info "Workbler Exception: #{exception.class} #{exception.message.inspect}\nBacktrace: #{exception.backtrace.join("\n")}\nAdditional Data: #{data.inspect}"
   end
   
   # Copied from Workling

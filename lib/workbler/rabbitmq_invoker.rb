@@ -39,11 +39,12 @@ module Workbler
     
     def dispatch!(klass, method, options = {})
       begin
-        Workbler.logger.info "Dispatching job: #{options.delete(:uid)}"
+        uid = options.delete(:uid)
+        Workbler.logger.info "Dispatching job: #{uid}"
         Workbler.find(klass, method)
         @workers[klass].send(method, options)
       rescue Exception => e
-        Workbler.logger.info "WORKBLER ERROR: runner could not invoke #{ self.class }:#{ method } with #{ options.inspect }. error was: #{ e.inspect }\n #{ e.backtrace.join("\n") }"
+        Workbler.exception_notify(e, {:type => "dispatch", :uid => uid, :klass => klass.to_s, :method => method.to_s, :options => options})
       end
     end
   end
