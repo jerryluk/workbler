@@ -4,16 +4,15 @@ Workbler allows you to run background jobs when you deploy your JRuby on Rails a
 
 Getting Started
 ===============
-1. Make sure you can install RubyGem from GitHub (you only have to do this once): jruby -S gem sources -a http://gems.github.com
-2. Install and start RabbitMQ (see below)
-3. Install warbler gem: jruby -S gem install warbler
-4. Install JRuby RabbitMQ Client: jruby -S gem install rabbitmq-jruby-client
-5. Install Workbler Plugin: jruby script/plugin install git://github.com/jerryluk/workbler.git
-6. Run the Workbler generator: jruby script/generate workbler workble
-7. Code Code Code
-8. To run background task in development mode, open a new terminal, and run "jruby script/workbler" in the app directory
-9. When you are ready to deploy, run: "warble"
-10. Deploy your railsapp.war file to your favorite Java application server
+1. Install and start RabbitMQ (see below)
+2. Install warbler gem: jruby -S gem install warbler
+3. Install JRuby RabbitMQ Client: jruby -S gem install rabbitmq-jruby-client
+4. Install Workbler Plugin: jruby script/plugin install git://github.com/jerryluk/workbler.git
+5. Run the Workbler generator: jruby script/generate workbler workble
+6. Code Code Code
+7. To run background task in development mode, open a new terminal, and run "jruby script/workbler" in the app directory
+8. When you are ready to deploy, run: "warble"
+9. Deploy your railsapp.war file to your favorite Java application server
 
 Example Usage
 =============
@@ -36,16 +35,13 @@ Please see config/workbler.yml
 Installing RabbitMQ on OS X
 ===========================
 1. Install MacPorts
-2. sudo port install erlang
-3. wget http://www.rabbitmq.com/releases/rabbitmq-server/v1.5.3/rabbitmq-server-generic-unix-1.5.3.tar.gz
-4. tar zxvf rabbitmq-server-generic-unix-1.5.3.tar.gz
-5. sudo mv rabbitmq_server-1.5.3 /opt/local/lib/erlang/lib
+2. sudo port install rabbitmq-server
 
 To run RabbitMQ
-6. sudo /opt/local/lib/erlang/lib/rabbitmq_server-1.5.3/sbin/rabbitmq-server
+3. sudo rabbitmq-server
 
 Credits
 =======
 Special thanks to Nick Sieger. He wrote the wonderful StartupScriptLauncher which this project would not exist without it.
 
-Copyright (c) 2009 Jerry Luk, released under the MIT license
+Copyright (c) 2010 Jerry Luk, released under the MIT license
