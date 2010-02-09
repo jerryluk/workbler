@@ -29,6 +29,16 @@ module Workbler
     uid
   end
   
+  def self.discard_jobs
+    client = RabbitMQClient.new(:host     => Workbler::Base.config[:host],
+                                :port     => Workbler::Base.config[:port],
+                                :username => Workbler::Base.config[:username],
+                                :password => Workbler::Base.config[:password],
+                                :vhost    => Workbler::Base.config[:vhost])
+    queue = client.queue(Workbler::Base.config[:queue], Workbler::Base.config[:persist])
+    queue.purge
+  end
+  
   def self.destroy
     @@mutex.synchronize do
       @@dispatcher.stop if @@dispatcher

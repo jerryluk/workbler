@@ -32,4 +32,12 @@ describe Workbler do
     @rabbitmq_dispatcher.should_receive(:run).with("this_is_a_class", :test, hash_including(:uid)).and_return(@rabbitmq_dispatcher)
     Workbler.run("this_is_a_class", :test)
   end
+  
+  it "should be able to discard all the previous jobs" do
+    mock_queue = mock("Queue")
+    mock_client = mock("RabbitMQClient", :queue => mock_queue)
+    RabbitMQClient.should_receive(:new).and_return(mock_client)
+    mock_queue.should_receive(:purge).and_return(true)
+    Workbler.discard_jobs
+  end
 end
